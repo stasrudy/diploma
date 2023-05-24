@@ -5,11 +5,13 @@ import requests
 import json
 import pprint
 
+
 @bot.message_handler(commands=["low"])
 def bot_low(message: Message):
-    location = input('В каком городе ищем отель?')
+    bot.send_message(message.chat.id, text="В каком городе ищем отель?")
+    city = message.text
     url = "https://hotels4.p.rapidapi.com/locations/v2/search"
-    querystring = {"query": location, "locale": "ru_RU", "currency": "USD"}
+    querystring = {"query": city, "locale": "ru_RU", "currency": "USD"}
 
     headers = {
         "X-RapidAPI-Key": RAPID_API_KEY,
